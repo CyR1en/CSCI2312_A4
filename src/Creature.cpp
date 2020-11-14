@@ -78,6 +78,7 @@ Balrog::Balrog() : Demon(11, 14) {}
 
 int Balrog::getDamage() const {
     int damage = Demon::getDamage();
-    cout << "Balrog speed attack inflicts " << damage << " additional damage points!" << endl;
-    return Demon::getDamage() + damage;
+    int damage2 = Demon::getDamage();
+    cout << "Balrog speed attack inflicts " << damage2 << " additional damage points!" << endl;
+    return damage + damage;
 }
