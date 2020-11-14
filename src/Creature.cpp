@@ -23,7 +23,11 @@ int Creature::getBaseDamage() const {
 
 string Creature::getCreature() {
     string cName = (string) typeid(*this).name();
-    return cName.substr(cName.find(' ') + 1);
+    cName = cName.substr(cName.find(' ') + 1);
+    cName.erase(remove_if(begin(cName), end(cName), [](auto ch) {
+        return std::isdigit(ch);
+    }), cName.end());
+    return cName;
 }
 
 // Human Impl
