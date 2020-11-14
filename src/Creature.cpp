@@ -1,5 +1,6 @@
 #include "Creature.h"
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
