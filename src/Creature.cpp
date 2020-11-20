@@ -144,7 +144,14 @@ Demon::Demon() : Creature(15, 15) {}
  */
 Demon::Demon(int _health, int _strength) : Creature(_health, _strength) {}
 
-
+/**
+ * Damage accessor for Demon
+ *
+ * With a 5% chance, a demon can get an additional 50 damage
+ * on top of the base damage.
+ *
+ * @return Demon's damage.
+ */
 int Demon::getDamage() const {
     int damage = getBaseDamage();
     if (is_lucky(0.05)) {
@@ -158,8 +165,21 @@ int Demon::getDamage() const {
 //  CyberDemon Impl
 // =====================
 
+/**
+ * CyberDemon constructor
+ *
+ * Calls parent class construct with 13 health and 17 strength.
+ */
 CyberDemon::CyberDemon() : Demon(13, 17) {}
 
+/**
+ * Damage accessor for CyberDemon.
+ *
+ * Since CyberDemon has the same attach attribute as a regular demon
+ * this function just calls the parent getDamage() function.
+ *
+ * @return CyberDemon damage.
+ */
 int CyberDemon::getDamage() const {
     return Demon::getDamage();
 }
@@ -168,8 +188,22 @@ int CyberDemon::getDamage() const {
 //  Balrog Impl
 // =====================
 
+/**
+ * Balrog constructor
+ *
+ * Calls parent class construct with 11 health and 14 strength.
+ */
 Balrog::Balrog() : Demon(11, 14) {}
 
+/**
+ * Damage accessor for Balrog
+ *
+ * Balrog has no special damage attribute but can attack two times.
+ * Since it can attack two times, the chance of it getting the extra
+ * 50 demon damage doubles.
+ *
+ * @return Balrog damage
+ */
 int Balrog::getDamage() const {
     int damage = Demon::getDamage();
     int damage2 = Demon::getDamage();
