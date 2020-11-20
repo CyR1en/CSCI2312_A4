@@ -8,22 +8,30 @@
 #include <string>
 #include <random>
 
-
-template<typename T>
-using uniform_distribution = std::conditional<
-        std::is_floating_point<T>::value,
-        std::uniform_real_distribution<T>,
-        std::uniform_int_distribution<T>
->;
+// A Uniform Distribution template to aid #rand() with templating.
+// Defines uniform_distribution in compile time.
+template<class T>
+using uniform_distribution =
+typename std::conditional<
+        std::is_floating_point<T>::value, // if T is a floating point
+        std::uniform_real_distribution<T>, // uniform_distribution should be this.
+        typename std::conditional< // else this.
+                std::is_integral<T>::value, // condition if T is integral
+                std::uniform_int_distribution<T>, // int distribution if true.
+                void // else void
+        >::type
+>::type;
 
 // Template function to generate a random generic type number from  a to b.
 template<typename T>
 T rand(T a, T b) {
-    std::random_device rd; // seeding object.
-    std::mt19937 engine(rd()); // engine and seed it with rd;
+    std::mt19937 engine(std::random_device{}()); // engine and seed it with rd;
     uniform_distribution<T> rangeDist(a, b); // [a, b] range distribution
     return rangeDist(engine);
 }
+
+// Simplify logic when implementing attack bonus.
+auto is_lucky = [](float chance) { return rand(0.0, 1.0) <= chance; };
 
 // Parent class for all of the Creatures
 class Creature {

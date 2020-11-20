@@ -118,7 +118,7 @@ Elf::Elf() : Creature(8, 13) {}
  */
 int Elf::getDamage() const {
     int damage = getBaseDamage();
-    if (rand(1, 100) <= 10) {
+    if (is_lucky(0.1)) {
         cout << "Magical attack inflicts " << damage << " additional damage points!" << endl;
         damage += damage;
     }
@@ -147,7 +147,7 @@ Demon::Demon(int _health, int _strength) : Creature(_health, _strength) {}
 
 int Demon::getDamage() const {
     int damage = getBaseDamage();
-    if (rand(1, 100) <= 5) {
+    if (is_lucky(0.05)) {
         damage += 50;
         cout << "Demonic attack inflicts " << 50 << " additional damage points!" << endl;
     }

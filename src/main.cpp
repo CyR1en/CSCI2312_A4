@@ -16,11 +16,15 @@ void test() {
     Creature *creature = new T();
     std::cout << creature->getCreature() << " is attacking!" << std::endl;
     for(int i = 0; i < 5; i++)
-        std::cout << creature->getDamage() << std::endl;
+        std::cout << creature->getCreature() << " dealt a total damage of: " << creature->getDamage() << std::endl;
 
     std::cout << std::endl;
 }
 
 int main() {
-    std::cout << rand(1, 50) << std::endl;
+    test<Human>();
+    test<Elf>();
+    test<Demon>();
+    test<CyberDemon>();
+    test<Balrog>();
 }
